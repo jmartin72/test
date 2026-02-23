@@ -1,0 +1,79 @@
+---
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  {
+    label: 'Services',
+    href: '/services',
+    children: [
+      { label: 'Web Design', href: '/services#web-design' },
+      { label: 'SEO', href: '/services#seo' },
+      { label: 'AI Enhancements', href: '/services#ai-enhancements' }
+    ]
+  },
+  { label: 'Our Work', href: '/our-work' },
+  { label: 'Contact', href: '/contact' }
+];
+---
+
+<header class="border-b border-slate-200 bg-white/95 sticky top-0 z-50 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-4 py-4 lg:flex-nowrap lg:justify-between">
+    <div class="flex w-full items-center justify-between lg:w-auto">
+      <a href="/" class="inline-flex items-center gap-2 text-lg font-semibold text-slate-900">
+        <span class="grid h-9 w-9 place-items-center rounded-md bg-indigo-600 text-sm font-bold text-white">SM</span>
+        <span>Studio Mercury</span>
+      </a>
+
+      <button
+        type="button"
+        class="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-800 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        Menu
+      </button>
+    </div>
+
+    <nav id="mobile-menu" class="hidden w-full lg:block lg:w-auto" data-menu>
+      <ul class="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-6">
+        {navItems.map((item) => (
+          <li class="group relative">
+            <a href={item.href} class="inline-flex w-full items-center rounded px-2 py-1 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 lg:w-auto">
+              {item.label}
+            </a>
+            {item.children && (
+              <ul class="ml-4 mt-1 space-y-1 border-l border-slate-200 pl-3 lg:absolute lg:left-0 lg:top-full lg:ml-0 lg:mt-2 lg:min-w-44 lg:rounded-lg lg:border lg:bg-white lg:p-2 lg:shadow-lg lg:opacity-0 lg:invisible lg:transition group-hover:lg:visible group-hover:lg:opacity-100">
+                {item.children.map((child) => (
+                  <li>
+                    <a href={child.href} class="block rounded px-2 py-1 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900">{child.label}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="/contact" class="hidden rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 lg:inline-block">
+      Schedule Free Consultation
+    </a>
+  </div>
+  <div class="px-4 pb-4 lg:hidden">
+    <a href="/contact" class="block rounded-md bg-indigo-600 px-4 py-2 text-center text-sm font-semibold text-white shadow hover:bg-indigo-500">
+      Schedule Free Consultation
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const menu = document.querySelector('[data-menu]');
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    menu?.classList.toggle('hidden', open);
+  });
+</script>
