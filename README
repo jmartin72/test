@@ -1,1 +1,13 @@
-Hello World!
+# Studio Mercury Astro Site
+
+Astro + Tailwind website scaffold for DreamHost shared hosting.
+
+## Commands
+
+```bash
+npm install
+npm run dev
+npm run build
+```
+
+Build output is generated in `dist/` and can be deployed directly to DreamHost shared hosting.
